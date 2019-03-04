@@ -50,12 +50,11 @@
         </button>
       </div>
        <input type="hidden" id="noteId" name="custId" value="">
-      <div class="modal-body" id="viewbodyid">
+      <div class="modal-body viewnote" id="viewbodyid">
 
       </div>
       <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="saveNote();">Save changes</button>
 
       </div>
     </div>
@@ -65,8 +64,6 @@
 
 
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Edit</button>
 
 <!-- Modal Edit-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -78,7 +75,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body editnote">
 
 		<div class="form-group">
     		<input id="noteeditdescr" class="form-control" type="text" placeholder="Short Note Description">
@@ -129,7 +126,7 @@
 function tableCreate(arr){
 
     var tableRef = document.getElementById('table_body');
-	var counter=1;
+	var counter=0;
 	while (tableRef.firstChild) {
     	tableRef.removeChild(tableRef.firstChild);
 	}
@@ -179,10 +176,9 @@ function tableCreate(arr){
 		function getAllNotes() {
 
 			var xhr = new XMLHttpRequest();
-			var open_str = "/rest/notes";
-			xhr.open("GET", open_str, true);
-			xhr.onreadystatechange = function() {
-
+			var url = "/rest/notes";
+			xhr.open("GET", url, true);
+			xhr.onload  = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					var json = JSON.parse(xhr.responseText);
 
@@ -190,16 +186,32 @@ function tableCreate(arr){
 
 				}
 			}
-			xhr.send();
+			xhr.send(null);
 
 		}
 
+function findOneNote (id){
+	var url  = "/rest/notes/"+id;
+
+	var xhr  = new XMLHttpRequest();
+	xhr.open("GET", url, true);
+	xhr.onload = function () {
+	alert(xhr.responseText);
+		if (xhr.readyState == 4 && xhr.status == "200") {
+			var note = JSON.parse(xhr.responseText);
+			alert(note.note);
+			return note;
+		} else {
+			console.error(note);
+		}
+	xhr.send(null);
+	}
+}
 		function editNote(id){
 
 
 			var note = findOneNote(id);
 
-			alert (note.descr);
 				document.getElementById('noteId').value = note.id;
 				document.getElementById('noteeditdescr').value = note.descr;
 				document.getElementById('editvalidationTextarea').value = note.note;
@@ -207,22 +219,6 @@ function tableCreate(arr){
 
 		}
 
-function findOneNote (id){
-	var url  = "/rest/notes/"+id;
-	var xhr  = new XMLHttpRequest()
-	xhr.open('GET', url, true)
-	xhr.onload = function () {
-		var note = JSON.parse(xhr.responseText);
-		if (xhr.readyState == 4 && xhr.status == "200") {
-
-			return note;
-		} else {
-			console.error(note);
-		}
-		alert(note.note);
-	xhr.send(null);
-	}
-}
 
 
 		function saveNewNote() {
@@ -287,9 +283,9 @@ function findOneNote (id){
 
 		}
 		function showModalView (note){
-			var note = findOneNote(id);
-			document.getElementsById('viewbodyid').innerHTML = note;
-			$('#exampleModal').modal('show');
+
+		document. getElementsByClassName("viewnote")[0].innerHTML = note;
+		$('#exampleviewmodal').modal('show');
 		}
 
 </script>

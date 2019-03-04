@@ -24,13 +24,11 @@ public class NoteRestController {
 
 	@GetMapping("/rest/notes")
 	public List<Note> getAll() {
-		System.out.println(noteService.findAll().size());
 		return noteService.findAll();
 	}
 
 	@GetMapping("/rest/notes/{id}")
 	public Note getOneNote(@PathVariable Long id) {
-		System.out.println("YES????");
 		return noteService.findById(id);
 	}
 

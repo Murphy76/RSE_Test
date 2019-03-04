@@ -22,20 +22,17 @@ public class UserRestController {
 
 	@GetMapping("/rest/users")
 	public List<User> all() {
-		System.out.println(userService.findAll().size());
 		return userService.findAll();
 	}
 
 	@GetMapping("/rest/users/{id}")
 	public User getOneUser(@PathVariable Long id) {
-		System.out.println("YES????");
 		return userService.findById(1L);
 	}
 
 	@RequestMapping(value = "/rest/users", method = RequestMethod.POST)
 	@ResponseBody
 	User newUser(@RequestBody User newUser) {
-		System.out.println("Post!!!");
 		return userService.save(newUser);
 	}
 
