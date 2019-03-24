@@ -97,7 +97,7 @@ http.csrf().disable();
 //	      .loginProcessingUrl("/notes")
 //	      .defaultSuccessUrl("/notes",true)
 //	      .failureUrl("/");
-http.authorizeRequests().antMatchers("/index").permitAll().antMatchers("/login").permitAll().anyRequest().authenticated();
+http.authorizeRequests().antMatchers("/console").permitAll().antMatchers("/login").permitAll().anyRequest().authenticated();
 
 
 		// Use AuthenticationEntryPoint to authenticate user/password
