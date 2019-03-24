@@ -7,7 +7,7 @@ import com.mycompany.sblogin.entity.User;
 public interface UserDaoIF {
 
 	public User save(User user);
-	public void delete(long userId);
+	public void delete(String userId);
 	public User findUserByName(String username);
 	public List<User> findAll();
 

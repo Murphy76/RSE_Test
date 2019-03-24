@@ -22,7 +22,24 @@ public class Note {
 
 	private String note;
 
-	private Long user_id;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="user_id")
+	private User user;
+
+
+	public Note() {
+		super();
+
+	}
+
+
+	public Note(Long id, String descr, String note, User user) {
+		super();
+		this.id = id;
+		this.descr = descr;
+		this.note = note;
+		this.user = user;
+	}
 
 
 	public Long getId() {
@@ -49,12 +66,14 @@ public class Note {
 		this.descr = descr;
 	}
 
-	public Long getUser_id() {
-		return user_id;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUser_id(Long user_id) {
-		this.user_id = user_id;
+	public void setUser(User user) {
+		this.user = user;
 	}
+
+
 
 }

@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		authenticationMgr.jdbcAuthentication().dataSource(dataSource).passwordEncoder(encoder())
 				.usersByUsernameQuery("select username, password, enabled from user where username=?")
 				.authoritiesByUsernameQuery(
-						"select U.username, R.role from role R inner join USER U on U.ID = R.USER_ID  where U.username=?");
+						"select U.username, R.role from role R inner join USER U on U.username = R.USER_ID  where U.username=?");
 	}
 
 

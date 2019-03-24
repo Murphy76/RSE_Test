@@ -2,16 +2,19 @@ package com.mycompany.sblogin.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	Long id;
-
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	String username;
 
 	String password;
@@ -27,14 +30,6 @@ public class User {
 		this.username = string;
 		this.password = string2;
 		this.enabled = b;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		id = id;
 	}
 
 	public String getUsername() {
@@ -63,7 +58,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled + "]";
+		return "User [id=" +  ", username=" + username + ", password=" + password + ", enabled=" + enabled + "]";
 	}
 
 

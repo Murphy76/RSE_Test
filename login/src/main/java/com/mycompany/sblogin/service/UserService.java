@@ -32,9 +32,9 @@ public class UserService {
 		return userDao.findAll();
 	}
 
-	public User findById(long id) {
+	public User findByName(String id) {
 
-		return userDao.findById(id);
+		return userDao.findByUsername(id);
 	}
 
 	public User save(User user) {
@@ -47,7 +47,7 @@ public class UserService {
 		return new User();
 	}
 
-	public void deleteById(Long id) {
+	public void deleteById(String id) {
 		try {
 			userDao.delete(id);
 		} catch (IllegalArgumentException e) {

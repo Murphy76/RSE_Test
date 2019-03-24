@@ -1,9 +1,10 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.springframework.org/security/tags">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>RSE_Test_PRG</title>
@@ -37,16 +38,24 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
-					<li class="nav-item active"><a class="nav-link" href="/welcome">Welcome page
-							<span class="sr-only">(current)</span>
+					<li class="nav-item active"><a class="nav-link"
+						href="/welcome">Welcome page <span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="/notes">My notes</a>
-					</li>
+					<li class="nav-item"><a class="nav-link" href="/notes">My
+							notes</a></li>
 					<li class="nav-item"><a class="nav-link" href="/registration">Registration</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="login?logout"
 						tabindex="-1" aria-disabled="true">Logout</a></li>
 				</ul>
 			</div>
+
+
+			<security:authorize access="isAuthenticated()">
+				<label id="username"><security:authentication
+						property="principal.username" /></label>
+			</security:authorize>
+
+
 		</nav>
 	</div>

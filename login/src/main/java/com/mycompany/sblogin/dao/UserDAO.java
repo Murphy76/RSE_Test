@@ -2,6 +2,8 @@ package com.mycompany.sblogin.dao;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
+
 import com.mycompany.sblogin.entity.User;
 import com.mycompany.sblogin.repositories.UserRepository;
 
@@ -27,7 +29,7 @@ public class UserDAO implements UserDaoIF {
 	}
 
 	@Override
-	public void delete(long userId) {
+	public void delete(String userId) {
 		userRepository.deleteById(userId);
 
 	}
@@ -41,10 +43,11 @@ public class UserDAO implements UserDaoIF {
 		return userRepository.findByUsername(username);
 	}
 
-	public User findById(long id) {
-
-		return userRepository.getOne(id);
+	public User findByUsername(String id) {
+		//Object unproxiedEntity = Hibernate.unproxy( proxy );
+		return (User) Hibernate.unproxy( userRepository.getOne(id));
 	}
+
 
 
 

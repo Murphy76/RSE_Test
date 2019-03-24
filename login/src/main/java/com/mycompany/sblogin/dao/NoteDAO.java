@@ -16,7 +16,7 @@ public class NoteDAO implements NoteDaoIF {
 
 	@Override
 	public Note save(Note note) {
-		return noteRepository.saveAndFlush(note);
+		return noteRepository.save(note);
 
 	}
 
